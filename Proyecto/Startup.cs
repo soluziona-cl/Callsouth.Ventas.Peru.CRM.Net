@@ -1,4 +1,5 @@
-using HDI.Controller;
+using CallSouth.Ventas.Peru.Controller;
+using CallSouth.Ventas.Peru.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -6,6 +7,7 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
@@ -15,7 +17,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HDI
+namespace CallSouth.Ventas.Peru
 {
     public class Startup
     {
@@ -30,6 +32,22 @@ namespace HDI
         public void ConfigureServices(IServiceCollection services)
         {
             //  services.AddSingleton<IFileProvider>(new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "Upload")));
+
+          //  services.AddSingleton<IFileProvider>(new PhysicalFileProvider("Y:\\"));
+            services.AddSingleton<IFileProvider>(new PhysicalFileProvider("E:\\"));
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy(name: "MiCors",
+                    builder =>
+                    {
+                        builder.WithHeaders("*");
+                        builder.WithOrigins("*");
+                        builder.WithMethods("*");
+
+                    });
+
+            });
 
             services.AddControllers().AddNewtonsoftJson();
 
@@ -59,7 +77,7 @@ namespace HDI
             services.AddSingleton<IJwtAuthenticationManager>(new JwtAuthenticationManager(tokenKey));
 
             services.AddCors();
-            services.AddDbContext<Context_HDI>(options =>
+            services.AddDbContext<Context_Ventas>(options =>
             {
                 options.UseSqlServer(Configuration.GetConnectionString("conn"));
 
@@ -69,7 +87,7 @@ namespace HDI
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "HDI.v1", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "CallSouth.Ventas.Peru.v1", Version = "v1" });
                 c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
                 {
                     Name = "Authorization",
@@ -102,7 +120,11 @@ namespace HDI
         {
             app.UseCors(option =>
             {
-                option.WithOrigins("http://localhost", "https://localhost", "https://127.0.0.1:5501", "http://127.0.0.1:44392", "http://127.0.0.1:5501", "https://127.0.0.1:5500", "http://127.0.0.1:5500", "https://app.siptelchile.cl/", "http://app.siptelchile.cl/", "http://172.16.119.20:80/", "https://172.16.119.20:443/").AllowAnyMethod();
+                option.WithOrigins("http://localhost", "https://localhost:5000", "https://127.0.0.1:5501", "http://127.0.0.1:44392", "http://127.0.0.1:5501",
+                    "https://127.0.0.1:5500", "http://127.0.0.1:5500",
+                    "https://app.soluziona.cl/", "http://app.soluziona.cl/", 
+                    "https://app.siptelchile.cl/", "http://app.siptelchile.cl/",
+                    "http://172.16.119.20:80/","https://172.16.119.20:443/").AllowAnyMethod();
                 option.AllowAnyMethod();
                 option.AllowAnyHeader();
             });
@@ -116,7 +138,7 @@ namespace HDI
                 app.UseSwaggerUI(c =>
                 {
 
-                    c.SwaggerEndpoint("v1/swagger.json", "HDI");
+                    c.SwaggerEndpoint("v1/swagger.json", "CallSouth.Ventas.Peru");
                     c.DefaultModelsExpandDepth(-1);
 
                 }

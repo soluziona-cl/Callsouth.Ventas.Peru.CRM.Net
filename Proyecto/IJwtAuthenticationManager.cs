@@ -6,24 +6,23 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 
-namespace HDI
+namespace CallSouth.Ventas.Peru
 {
     public interface IJwtAuthenticationManager
     {
 
-        string Authenticate(string usernmae, string password);
+        string Authenticate(string dato, string dato_2);
+        string AuthenticateCRM(string dato, string dato_2);
+
 
     }
 
     public class JwtAuthenticationManager : IJwtAuthenticationManager
     {
 
-        private readonly IDictionary<string, string> users = new Dictionary<string, string>
-        {{ "QA_HDI","QA_HDI_2022"},{ "PROD_HDI","PROD_HDI_2022"}};
 
 
         private readonly string key;
-
         public JwtAuthenticationManager(string key)
         {
 
@@ -31,15 +30,9 @@ namespace HDI
         }
 
 
-        public string Authenticate(string username, string password)
+        public string Authenticate(string dato, string dato_2)
         {
 
-
-            if (!users.Any(u => u.Key == username && u.Value == password))
-            {
-                return null;
-
-            }
 
             var tokenHandler = new JwtSecurityTokenHandler();
             var tokenKey = Encoding.ASCII.GetBytes(key);
@@ -49,7 +42,8 @@ namespace HDI
 
                 Subject = new ClaimsIdentity(new Claim[]
                 {
-                    new Claim(ClaimTypes.Name, username),
+                    new Claim(ClaimTypes.Name, dato),
+
                 }),
                 Expires = DateTime.UtcNow.AddHours(1),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(tokenKey), SecurityAlgorithms.HmacSha256Signature)
@@ -63,5 +57,33 @@ namespace HDI
 
         }
 
+
+        public string AuthenticateCRM(string dato, string dato_2)
+        {
+
+
+
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var tokenKey = Encoding.ASCII.GetBytes(key);
+
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+
+                Subject = new ClaimsIdentity(new Claim[]
+                {
+                    new Claim(ClaimTypes.Name, dato),
+                      new Claim(ClaimTypes.Role, "CRM_Supervisor"),
+                }),
+                Expires = DateTime.UtcNow.AddHours(1),
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(tokenKey), SecurityAlgorithms.HmacSha256Signature)
+
+            };
+
+            var token = tokenHandler.CreateToken(tokenDescriptor);
+            return tokenHandler.WriteToken(token);
+
+
+
+        }
     }
 }
