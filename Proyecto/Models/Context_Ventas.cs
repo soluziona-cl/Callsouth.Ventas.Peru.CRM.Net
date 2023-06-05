@@ -1,6 +1,10 @@
 ﻿using System;
+using CallSouth.VentasCRM.Clases;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+
+
+    
 
 #nullable disable
 
@@ -24,6 +28,8 @@ namespace CallSouth.Ventas.Peru.Models
         public DbSet<Login_out> Login_out { get; set; }
         public DbSet<Login_out_result> login_Out_Results { get; set; }
         public DbSet<Login> Logins { get; set; }
+        public DbSet<Usuarios> usuarios { get; set; }
+        public DbSet<Cargador_Validador> cargador_Validadors { get; set; }
 
 
         public DbSet<SaveUrl> saveUrls { get; set; }
@@ -47,41 +53,28 @@ namespace CallSouth.Ventas.Peru.Models
         public DbSet<Gestion_NC_Radar> gestion_NC_Radars { get; set; }
         public DbSet<CRM_Carga_Resumen_Dash> cRM_Carga_Resumen_Dashes { get; set; }
         public DbSet<CRM_Carga_Resumen_DashAdmin> cRM_Carga_Resumen_DashAdmins { get; set; }
+        public DbSet<Panel_Hopper> panel_Hoppers { get; set; }
+        public DbSet<Carga_Resultado_Ripley> carga_Resultado_Ripleys  { get; set; }
+        public DbSet<Calidad_Admin_List> calidad_Admin_Lists { get; set; }
+        public DbSet<Calidad_Admin_List_Total> calidad_Admin_List_Totals { get; set; }
+        public DbSet<Calidad_Admin_List_Apeladas> calidad_Admin_List_Apeladas { get; set; }
+        public DbSet<Calidad_Admin_List_Asignadas> calidad_Admin_List_Asignadas { get; set; }
+        public DbSet<Calidad_Admin_List_Apelados> calidad_Admin_List_Apelados { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if (!optionsBuilder.IsConfigured)
-            {
-                optionsBuilder.UseSqlServer("Name=conn");
-            }
-        }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<TblOpcionLlamadum>(entity =>
-            {
-                entity.HasNoKey();
+        public DbSet<CargaBasesFlujo> cargaBasesFlujos { get; set; }
+        public DbSet<Resultante_ABCDIN_2> resultante_ABCDIN_2s { get; set; }
+        public DbSet<CallIntro_Gestion_Dia> callIntro_Gestion_Dias { get; set; }
+        public DbSet<CallIntro_Gestion_Venta> callIntro_Gestion_Ventas { get; set; }
+        public DbSet<tbl_Horas_Logeo_Full> tbl_Horas_Logeo_Fulls { get; set; }
+        public DbSet<CallIntro_Gestion_NoVenta> callIntro_Gestion_NoVentas { get; set; }
+        public DbSet<tbl_NoVentas> tbl_NoVentas { get; set; }
+        public DbSet<SeguimientoBBDD> seguimientoBBDDs { get; set; }
+        public DbSet<UltimoIntento> ultimoIntentos { get; set; }
+        public DbSet<ValidacionVenta> validacionVentas { get; set; }
+        public DbSet<EstadoVentas> estadoVentas { get; set; }
+        public DbSet<PanelTematico> panelTematicos { get; set; }
 
-                entity.ToTable("tbl_Opcion_Llamada");
 
-                entity.Property(e => e.Agenda)
-                    .HasMaxLength(100)
-                    .HasColumnName("agenda");
-
-                entity.Property(e => e.Detalle)
-                    .HasMaxLength(300)
-                    .HasColumnName("detalle");
-
-                entity.Property(e => e.Id)
-                    .ValueGeneratedOnAdd()
-                    .HasColumnName("id");
-
-                entity.Property(e => e.Padre).HasColumnName("padre");
-            });
-
-            OnModelCreatingPartial(modelBuilder);
-        }
-
-        partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
     }
 }
