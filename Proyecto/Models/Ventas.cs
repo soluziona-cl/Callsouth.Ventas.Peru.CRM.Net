@@ -666,6 +666,62 @@ namespace CallSouth.Ventas.Peru.Models
 
     }
 
+    public class Filtros
+    {
+        [Key]
+        public string detalle { get; set; }
+
+    }
+    public class Flujo_ingreso_Filtros
+    {
+        [Key]
+        public string dato { get; set; }
+        public string dato_1 { get; set; }
+        public string dato_2 { get; set; }
+        public string dato_3 { get; set; }
+        public string dato_4 { get; set; }
+        public string dato_5 { get; set; }
+        public string dato_6 { get; set; }
+        public string dato_7 { get; set; }
+        public string dato_8 { get; set; }
+        public string dato_9 { get; set; }
+        public string dato_10 { get; set; }
+        public string dato_11 { get; set; }
+        public string dato_12 { get; set; }
+        public string dato_13 { get; set; }
+        public string dato_14 { get; set; }
+        public string dato_15 { get; set; }
+        public string dato_16 { get; set; }
+        public string dato_17 { get; set; }
+        public string dato_18 { get; set; }
+        public string dato_19 { get; set; }
+        public string dato_20 { get; set; }
+        public string dato_21 { get; set; }
+        public string dato_22 { get; set; }
+        public string dato_23 { get; set; }
+        public string dato_24 { get; set; }
+        public string dato_25 { get; set; }
+        public string dato_26 { get; set; }
+        public string dato_27 { get; set; }
+        public string dato_28 { get; set; }
+        public string dato_29 { get; set; }
+        public string dato_30 { get; set; }
+        public string dato_31 { get; set; }
+        public string dato_32 { get; set; }
+        public string dato_33 { get; set; }
+        public string dato_34 { get; set; }
+        public string dato_35 { get; set; }
+        public string dato_36 { get; set; }
+        public string dato_37 { get; set; }
+        public string dato_38 { get; set; }
+        public string dato_39 { get; set; }
+        public string dato_40 { get; set; }
+        public string dato_41 { get; set; }
+       
+
+    }
+
+
     public class Cargador_Validador
     {
         [Key]

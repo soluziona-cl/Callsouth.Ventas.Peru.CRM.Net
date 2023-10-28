@@ -45,7 +45,7 @@ namespace CallSouth.Ventas.Peru
                     new Claim(ClaimTypes.Name, dato),
 
                 }),
-                Expires = DateTime.UtcNow.AddHours(1),
+                Expires = DateTime.UtcNow.AddHours(10),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(tokenKey), SecurityAlgorithms.HmacSha256Signature)
 
             };
@@ -74,7 +74,7 @@ namespace CallSouth.Ventas.Peru
                     new Claim(ClaimTypes.Name, dato),
                       new Claim(ClaimTypes.Role, "CRM_Supervisor"),
                 }),
-                Expires = DateTime.UtcNow.AddHours(1),
+                Expires = DateTime.UtcNow.AddHours(10),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(tokenKey), SecurityAlgorithms.HmacSha256Signature)
 
             };

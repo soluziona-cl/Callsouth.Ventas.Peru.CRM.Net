@@ -33,8 +33,9 @@ namespace CallSouth.Ventas.Peru
         {
             //  services.AddSingleton<IFileProvider>(new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "Upload")));
 
-          //  services.AddSingleton<IFileProvider>(new PhysicalFileProvider("Y:\\"));
+            //  services.AddSingleton<IFileProvider>(new PhysicalFileProvider("Y:\\"));
             services.AddSingleton<IFileProvider>(new PhysicalFileProvider("E:\\"));
+            //services.AddSingleton<IFileProvider>(new PhysicalFileProvider("D:\\"));
 
             services.AddCors(options =>
             {
@@ -121,7 +122,7 @@ namespace CallSouth.Ventas.Peru
             app.UseCors(option =>
             {
                 option.WithOrigins("http://localhost", "https://localhost:5000", "https://127.0.0.1:5501", "http://127.0.0.1:44392", "http://127.0.0.1:5501",
-                    "https://127.0.0.1:5500", "http://127.0.0.1:5500",
+                    "https://127.0.0.1:5500", "http://127.0.0.1:5500", "http://localhost:3000", "https://localhost:3000",
                     "https://app.soluziona.cl/", "http://app.soluziona.cl/", 
                     "https://app.siptelchile.cl/", "http://app.siptelchile.cl/",
                     "http://172.16.119.20:80/","https://172.16.119.20:443/").AllowAnyMethod();

@@ -74,6 +74,8 @@ namespace CallSouth.Ventas.Peru.Models
         public DbSet<ValidacionVenta> validacionVentas { get; set; }
         public DbSet<EstadoVentas> estadoVentas { get; set; }
         public DbSet<PanelTematico> panelTematicos { get; set; }
+        public DbSet<Flujo_ingreso_Filtros> flujo_Ingreso_Filtros { get; set; }
+        public DbSet<Filtros> filtros { get; set; }
 
 
     }

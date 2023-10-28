@@ -42,6 +42,350 @@ namespace CallSouth.Ventas.Peru.Controller
             Configuration = _configuration;
         }
 
+
+        [HttpPost]
+        [Authorize(Roles = "CRM_Supervisor")]
+        [Route("CRM/Filtros")]
+        public async Task<List<Filtros>> Get_Filtros(Flujo_ingreso flujo_In)
+        {
+            string stored = "exec sp_filtros   @company='" + flujo_In.dato + "',@pTYPE='" + flujo_In.dato_1 + "'";
+            return await _context.filtros.FromSqlRaw(stored).AsNoTracking().ToListAsync();
+
+        }
+
+
+        [HttpPost]
+        [Authorize(Roles = "CRM_Supervisor")]
+        [Route("CRM/PanelVentas")]
+        public async Task<List<Flujo_Respuesta>> Get_PanelVenta(Flujo_ingreso_Filtros flujo_In)
+        {
+            string stored = "exec sp_panel_principal_ventas   @blockanexo='" + flujo_In.dato + "'";
+            return await _context.flujo_Respuestas.FromSqlRaw(stored).AsNoTracking().ToListAsync();
+
+        } 
+        
+        
+        [HttpPost]
+        [Authorize(Roles = "CRM_Supervisor")]
+        [Route("CRM/Filtros/Resultado/Asignacion")]
+        public async Task<List<Flujo_Respuesta>> Get_FiltrosAsignacion(Flujo_ingreso_Filtros flujo_In)
+        {
+            string stored = "exec sp_filtros_asignacion_filtros   @p_valorSeleccionadoAsignado='" + flujo_In.dato
+                + "',@p_valorSeleccionadoGestionado='" + flujo_In.dato_1
+                + "',@p_valorSeleccionadoTipoBase='" + flujo_In.dato_2
+                + "',@p_valorSeleccionadoCargas='" + flujo_In.dato_3
+                + "',@p_valorSeleccionadoGenero='" + flujo_In.dato_4
+                + "',@p_valorSeleccionadoTipoFiltro='" + flujo_In.dato_5
+                + "',@p_valorSeleccionadoAgente='" + flujo_In.dato_6
+                + "',@p_valorSeleccionadoGeografica='" + flujo_In.dato_7
+                + "',@p_valorSeleccionadoPerfil='" + flujo_In.dato_8
+                + "',@FilterTypeIntentos='" + flujo_In.dato_9
+                + "',@FilterTypeEdad='" + flujo_In.dato_10
+                + "',@FilterTypeTiempo='" + flujo_In.dato_11
+                + "',@FilterTypeTeFecha='" + flujo_In.dato_12
+                + "',@IntentosFilterType='" + flujo_In.dato_13
+                + "',@IntentosValue='" + flujo_In.dato_14
+                + "',@EdadFilterType='" + flujo_In.dato_15
+                + "',@EdadValue='" + flujo_In.dato_16
+                + "',@TiempoFilterType='" + flujo_In.dato_17
+                + "',@TiempoValue='" + flujo_In.dato_18
+                + "',@FechaInicio='" + flujo_In.dato_19
+                + "',@FechaFin='" + flujo_In.dato_20
+                + "',@company='" + flujo_In.dato_21
+                + "',@Chubb_Variable1='" + flujo_In.dato_22
+                + "',@Chubb_Variable2='" + flujo_In.dato_23
+                + "',@Chubb_Variable3='" + flujo_In.dato_24
+                + "',@Chubb_Variable4='" + flujo_In.dato_25
+                + "',@Chubb_Variable5='" + flujo_In.dato_26
+                + "',@Chubb_Variable6='" + flujo_In.dato_27
+                + "',@Chubb_Variable7='" + flujo_In.dato_28
+                + "',@Chubb_Variable8='" + flujo_In.dato_29
+                + "',@Chubb_Variable9='" + flujo_In.dato_30
+                + "',@Chubb_Variable10='" + flujo_In.dato_31
+                + "',@Chubb_Variable11='" + flujo_In.dato_32
+                + "',@Chubb_Variable12='" + flujo_In.dato_33
+                + "',@Chubb_Variable13='" + flujo_In.dato_34
+                + "',@Item='" + flujo_In.dato_35 
+                + "',@flujo='" + flujo_In.dato_36 
+                + "',@cantidad='" + flujo_In.dato_37 
+                + "',@cartera='" + flujo_In.dato_38
+                + "',@agente='" + flujo_In.dato_39
+                + "',@block='" + flujo_In.dato_40 
+                + "',@blockanexo='" + flujo_In.dato_41 + "'";
+            return await _context.flujo_Respuestas.FromSqlRaw(stored).AsNoTracking().ToListAsync();
+
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "CRM_Supervisor")]
+        [Route("CRM/Filtros/Resultado/Express")]
+        public async Task<List<Flujo_Respuesta>> Get_FiltrosExpress(Flujo_ingreso_Filtros flujo_In)
+        {
+            string stored = "exec sp_filtros_resultado_filtro_express   @p_valorSeleccionadoAsignado='" + flujo_In.dato
+                + "',@p_valorSeleccionadoGestionado='" + flujo_In.dato_1
+                + "',@p_valorSeleccionadoTipoBase='" + flujo_In.dato_2
+                + "',@p_valorSeleccionadoCargas='" + flujo_In.dato_3
+                + "',@p_valorSeleccionadoGenero='" + flujo_In.dato_4
+                + "',@p_valorSeleccionadoTipoFiltro='" + flujo_In.dato_5
+                + "',@p_valorSeleccionadoAgente='" + flujo_In.dato_6
+                + "',@p_valorSeleccionadoGeografica='" + flujo_In.dato_7
+                + "',@p_valorSeleccionadoPerfil='" + flujo_In.dato_8
+                + "',@FilterTypeIntentos='" + flujo_In.dato_9
+                + "',@FilterTypeEdad='" + flujo_In.dato_10
+                + "',@FilterTypeTiempo='" + flujo_In.dato_11
+                + "',@FilterTypeTeFecha='" + flujo_In.dato_12
+                + "',@IntentosFilterType='" + flujo_In.dato_13
+                + "',@IntentosValue='" + flujo_In.dato_14
+                + "',@EdadFilterType='" + flujo_In.dato_15
+                + "',@EdadValue='" + flujo_In.dato_16
+                + "',@TiempoFilterType='" + flujo_In.dato_17
+                + "',@TiempoValue='" + flujo_In.dato_18
+                + "',@FechaInicio='" + flujo_In.dato_19
+                + "',@FechaFin='" + flujo_In.dato_20
+                + "',@company='" + flujo_In.dato_21
+                + "',@Chubb_Variable1='" + flujo_In.dato_22
+                + "',@Chubb_Variable2='" + flujo_In.dato_23
+                + "',@Chubb_Variable3='" + flujo_In.dato_24
+                + "',@Chubb_Variable4='" + flujo_In.dato_25
+                + "',@Chubb_Variable5='" + flujo_In.dato_26
+                + "',@Chubb_Variable6='" + flujo_In.dato_27
+                + "',@Chubb_Variable7='" + flujo_In.dato_28
+                + "',@Chubb_Variable8='" + flujo_In.dato_29
+                + "',@Chubb_Variable9='" + flujo_In.dato_30
+                + "',@Chubb_Variable10='" + flujo_In.dato_31
+                + "',@Chubb_Variable11='" + flujo_In.dato_32
+                + "',@Chubb_Variable12='" + flujo_In.dato_33
+                + "',@Chubb_Variable13='" + flujo_In.dato_34
+                + "',@Item='" + flujo_In.dato_35 
+                + "',@flujo='" + flujo_In.dato_36 + "'";
+            return await _context.flujo_Respuestas.FromSqlRaw(stored).AsNoTracking().ToListAsync();
+
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "CRM_Supervisor")]
+        [Route("CRM/Filtros/Resultado/Conjunto")]
+        public async Task<List<Flujo_Respuesta>> Get_FiltrosConjunto(Flujo_ingreso_Filtros flujo_In)
+        {
+            string stored = "exec sp_filtros_resultado_conjunto   @p_valorSeleccionadoAsignado='" + flujo_In.dato
+                + "',@p_valorSeleccionadoGestionado='" + flujo_In.dato_1
+                + "',@p_valorSeleccionadoTipoBase='" + flujo_In.dato_2
+                + "',@p_valorSeleccionadoCargas='" + flujo_In.dato_3
+                + "',@p_valorSeleccionadoGenero='" + flujo_In.dato_4
+                + "',@p_valorSeleccionadoTipoFiltro='" + flujo_In.dato_5
+                + "',@p_valorSeleccionadoAgente='" + flujo_In.dato_6
+                + "',@p_valorSeleccionadoGeografica='" + flujo_In.dato_7
+                + "',@p_valorSeleccionadoPerfil='" + flujo_In.dato_8
+                + "',@FilterTypeIntentos='" + flujo_In.dato_9
+                + "',@FilterTypeEdad='" + flujo_In.dato_10
+                + "',@FilterTypeTiempo='" + flujo_In.dato_11
+                + "',@FilterTypeTeFecha='" + flujo_In.dato_12
+                + "',@IntentosFilterType='" + flujo_In.dato_13
+                + "',@IntentosValue='" + flujo_In.dato_14
+                + "',@EdadFilterType='" + flujo_In.dato_15
+                + "',@EdadValue='" + flujo_In.dato_16
+                + "',@TiempoFilterType='" + flujo_In.dato_17
+                + "',@TiempoValue='" + flujo_In.dato_18
+                + "',@FechaInicio='" + flujo_In.dato_19
+                + "',@FechaFin='" + flujo_In.dato_20
+                + "',@company='" + flujo_In.dato_21
+                + "',@Chubb_Variable1='" + flujo_In.dato_22
+                + "',@Chubb_Variable2='" + flujo_In.dato_23
+                + "',@Chubb_Variable3='" + flujo_In.dato_24
+                + "',@Chubb_Variable4='" + flujo_In.dato_25
+                + "',@Chubb_Variable5='" + flujo_In.dato_26
+                + "',@Chubb_Variable6='" + flujo_In.dato_27
+                + "',@Chubb_Variable7='" + flujo_In.dato_28
+                + "',@Chubb_Variable8='" + flujo_In.dato_29
+                + "',@Chubb_Variable9='" + flujo_In.dato_30
+                + "',@Chubb_Variable10='" + flujo_In.dato_31
+                + "',@Chubb_Variable11='" + flujo_In.dato_32
+                + "',@Chubb_Variable12='" + flujo_In.dato_33
+                + "',@Chubb_Variable13='" + flujo_In.dato_34 + "'";
+            return await _context.flujo_Respuestas.FromSqlRaw(stored).AsNoTracking().ToListAsync();
+
+        }
+
+
+        [HttpPost]
+        [Authorize(Roles = "CRM_Supervisor")]
+        [Route("CRM/Filtros/Resultado/Detalle")]
+        public async Task<List<Flujo_Respuesta>> Get_FiltrosResultadoDetalle(Flujo_ingreso_Filtros flujo_In)
+        {
+            string stored = "exec sp_filtros_resultado_detalle   @p_valorSeleccionadoAsignado='" + flujo_In.dato
+                + "',@p_valorSeleccionadoGestionado='" + flujo_In.dato_1
+                + "',@p_valorSeleccionadoTipoBase='" + flujo_In.dato_2
+                + "',@p_valorSeleccionadoCargas='" + flujo_In.dato_3
+                + "',@p_valorSeleccionadoGenero='" + flujo_In.dato_4
+                + "',@p_valorSeleccionadoTipoFiltro='" + flujo_In.dato_5
+                + "',@p_valorSeleccionadoAgente='" + flujo_In.dato_6
+                + "',@p_valorSeleccionadoGeografica='" + flujo_In.dato_7
+                + "',@p_valorSeleccionadoPerfil='" + flujo_In.dato_8
+                + "',@FilterTypeIntentos='" + flujo_In.dato_9
+                + "',@FilterTypeEdad='" + flujo_In.dato_10
+                + "',@FilterTypeTiempo='" + flujo_In.dato_11
+                + "',@FilterTypeTeFecha='" + flujo_In.dato_12
+                + "',@IntentosFilterType='" + flujo_In.dato_13
+                + "',@IntentosValue='" + flujo_In.dato_14
+                + "',@EdadFilterType='" + flujo_In.dato_15
+                + "',@EdadValue='" + flujo_In.dato_16
+                + "',@TiempoFilterType='" + flujo_In.dato_17
+                + "',@TiempoValue='" + flujo_In.dato_18
+                + "',@FechaInicio='" + flujo_In.dato_19
+                + "',@FechaFin='" + flujo_In.dato_20
+                + "',@company='" + flujo_In.dato_21
+                + "',@Chubb_Variable1='" + flujo_In.dato_22
+                + "',@Chubb_Variable2='" + flujo_In.dato_23
+                + "',@Chubb_Variable3='" + flujo_In.dato_24
+                + "',@Chubb_Variable4='" + flujo_In.dato_25
+                + "',@Chubb_Variable5='" + flujo_In.dato_26
+                + "',@Chubb_Variable6='" + flujo_In.dato_27
+                + "',@Chubb_Variable7='" + flujo_In.dato_28
+                + "',@Chubb_Variable8='" + flujo_In.dato_29
+                + "',@Chubb_Variable9='" + flujo_In.dato_30
+                + "',@Chubb_Variable10='" + flujo_In.dato_31
+                + "',@Chubb_Variable11='" + flujo_In.dato_32
+                + "',@Chubb_Variable12='" + flujo_In.dato_33
+                + "',@Chubb_Variable13='" + flujo_In.dato_34 
+                +"',@Item='" + flujo_In.dato_35 + "'";
+            return await _context.flujo_Respuestas.FromSqlRaw(stored).AsNoTracking().ToListAsync();
+
+        }
+
+
+        [HttpPost]
+        [Authorize(Roles = "CRM_Supervisor")]
+        [Route("CRM/Filtros/Resultado")]
+        public async Task<List<Flujo_Respuesta>> Get_FiltrosResultado(Flujo_ingreso_Filtros flujo_In)
+        {
+            string stored = "exec sp_filtros_resultado   @p_valorSeleccionadoAsignado='" + flujo_In.dato
+                + "',@p_valorSeleccionadoGestionado='" + flujo_In.dato_1
+                + "',@p_valorSeleccionadoTipoBase='" + flujo_In.dato_2
+                + "',@p_valorSeleccionadoCargas='" + flujo_In.dato_3
+                + "',@p_valorSeleccionadoGenero='" + flujo_In.dato_4
+                + "',@p_valorSeleccionadoTipoFiltro='" + flujo_In.dato_5
+                + "',@p_valorSeleccionadoAgente='" + flujo_In.dato_6
+                + "',@p_valorSeleccionadoGeografica='" + flujo_In.dato_7
+                + "',@p_valorSeleccionadoPerfil='" + flujo_In.dato_8
+                + "',@FilterTypeIntentos='" + flujo_In.dato_9
+                + "',@FilterTypeEdad='" + flujo_In.dato_10
+                + "',@FilterTypeTiempo='" + flujo_In.dato_11
+                + "',@FilterTypeTeFecha='" + flujo_In.dato_12
+                + "',@IntentosFilterType='" + flujo_In.dato_13
+                + "',@IntentosValue='" + flujo_In.dato_14
+                + "',@EdadFilterType='" + flujo_In.dato_15
+                + "',@EdadValue='" + flujo_In.dato_16
+                + "',@TiempoFilterType='" + flujo_In.dato_17
+                + "',@TiempoValue='" + flujo_In.dato_18
+                + "',@FechaInicio='" + flujo_In.dato_19
+                + "',@FechaFin='" + flujo_In.dato_20
+                + "',@company='" + flujo_In.dato_21
+                + "',@Chubb_Variable1='" + flujo_In.dato_22
+                + "',@Chubb_Variable2='" + flujo_In.dato_23
+                + "',@Chubb_Variable3='" + flujo_In.dato_24
+                + "',@Chubb_Variable4='" + flujo_In.dato_25
+                + "',@Chubb_Variable5='" + flujo_In.dato_26 
+                + "',@Chubb_Variable6='" + flujo_In.dato_27
+                + "',@Chubb_Variable7='" + flujo_In.dato_28
+                + "',@Chubb_Variable8='" + flujo_In.dato_29
+                + "',@Chubb_Variable9='" + flujo_In.dato_30
+                + "',@Chubb_Variable10='" + flujo_In.dato_31
+                + "',@Chubb_Variable11='" + flujo_In.dato_32
+                + "',@Chubb_Variable12='" + flujo_In.dato_33
+                + "',@Chubb_Variable13='" + flujo_In.dato_34 + "'";
+            return await _context.flujo_Respuestas.FromSqlRaw(stored).AsNoTracking().ToListAsync();
+
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "CRM_Supervisor")]
+        [Route("CRM/Filtros/Resumen")]
+        public async Task<List<Flujo_Respuesta>> Get_FiltrosResumen(Flujo_ingreso_Filtros flujo_In)
+        {
+            string stored = "exec sp_filtros_resultado_resumen_2   @p_valorSeleccionadoAsignado='" + flujo_In.dato
+                + "',@p_valorSeleccionadoGestionado='" + flujo_In.dato_1
+                + "',@p_valorSeleccionadoTipoBase='" + flujo_In.dato_2
+                + "',@p_valorSeleccionadoCargas='" + flujo_In.dato_3
+                + "',@p_valorSeleccionadoGenero='" + flujo_In.dato_4
+                + "',@p_valorSeleccionadoTipoFiltro='" + flujo_In.dato_5
+                + "',@p_valorSeleccionadoAgente='" + flujo_In.dato_6
+                + "',@p_valorSeleccionadoGeografica='" + flujo_In.dato_7
+                + "',@p_valorSeleccionadoPerfil='" + flujo_In.dato_8
+                + "',@FilterTypeIntentos='" + flujo_In.dato_9
+                + "',@FilterTypeEdad='" + flujo_In.dato_10
+                + "',@FilterTypeTiempo='" + flujo_In.dato_11
+                + "',@FilterTypeTeFecha='" + flujo_In.dato_12
+                + "',@IntentosFilterType='" + flujo_In.dato_13
+                + "',@IntentosValue='" + flujo_In.dato_14
+                + "',@EdadFilterType='" + flujo_In.dato_15
+                + "',@EdadValue='" + flujo_In.dato_16
+                + "',@TiempoFilterType='" + flujo_In.dato_17
+                + "',@TiempoValue='" + flujo_In.dato_18
+                + "',@FechaInicio='" + flujo_In.dato_19
+                + "',@FechaFin='" + flujo_In.dato_20
+                + "',@company='" + flujo_In.dato_21
+                + "',@Chubb_Variable1='" + flujo_In.dato_22
+                + "',@Chubb_Variable2='" + flujo_In.dato_23
+                + "',@Chubb_Variable3='" + flujo_In.dato_24
+                + "',@Chubb_Variable4='" + flujo_In.dato_25
+                + "',@Chubb_Variable5='" + flujo_In.dato_26
+                + "',@Chubb_Variable6='" + flujo_In.dato_27
+                + "',@Chubb_Variable7='" + flujo_In.dato_28
+                + "',@Chubb_Variable8='" + flujo_In.dato_29
+                + "',@Chubb_Variable9='" + flujo_In.dato_30
+                + "',@Chubb_Variable10='" + flujo_In.dato_31
+                + "',@Chubb_Variable11='" + flujo_In.dato_32
+                + "',@Chubb_Variable12='" + flujo_In.dato_33
+                + "',@Chubb_Variable13='" + flujo_In.dato_34 + "'";
+
+            return await _context.flujo_Respuestas.FromSqlRaw(stored).AsNoTracking().ToListAsync();
+
+        }
+        [HttpPost]
+        [Authorize(Roles = "CRM_Supervisor")]
+        [Route("CRM/Filtros/Resumen/Filtros")]
+        public async Task<List<Flujo_Respuesta>> Get_FiltrosResumenFiltros(Flujo_ingreso_Filtros flujo_In)
+        {
+            string stored = "exec sp_filtros_resultado_resumen_filtros    @p_valorSeleccionadoAsignado='" + flujo_In.dato
+                + "',@p_valorSeleccionadoGestionado='" + flujo_In.dato_1
+                + "',@p_valorSeleccionadoTipoBase='" + flujo_In.dato_2
+                + "',@p_valorSeleccionadoCargas='" + flujo_In.dato_3
+                + "',@p_valorSeleccionadoGenero='" + flujo_In.dato_4
+                + "',@p_valorSeleccionadoTipoFiltro='" + flujo_In.dato_5
+                + "',@p_valorSeleccionadoAgente='" + flujo_In.dato_6
+                + "',@p_valorSeleccionadoGeografica='" + flujo_In.dato_7
+                + "',@p_valorSeleccionadoPerfil='" + flujo_In.dato_8
+                + "',@FilterTypeIntentos='" + flujo_In.dato_9
+                + "',@FilterTypeEdad='" + flujo_In.dato_10
+                + "',@FilterTypeTiempo='" + flujo_In.dato_11
+                + "',@FilterTypeTeFecha='" + flujo_In.dato_12
+                + "',@IntentosFilterType='" + flujo_In.dato_13
+                + "',@IntentosValue='" + flujo_In.dato_14
+                + "',@EdadFilterType='" + flujo_In.dato_15
+                + "',@EdadValue='" + flujo_In.dato_16
+                + "',@TiempoFilterType='" + flujo_In.dato_17
+                + "',@TiempoValue='" + flujo_In.dato_18
+                + "',@FechaInicio='" + flujo_In.dato_19
+                + "',@FechaFin='" + flujo_In.dato_20
+                + "',@company='" + flujo_In.dato_21
+                + "',@Chubb_Variable1='" + flujo_In.dato_22
+                + "',@Chubb_Variable2='" + flujo_In.dato_23
+                + "',@Chubb_Variable3='" + flujo_In.dato_24
+                + "',@Chubb_Variable4='" + flujo_In.dato_25
+                + "',@Chubb_Variable5='" + flujo_In.dato_26 
+                + "',@Chubb_Variable6='" + flujo_In.dato_27
+                + "',@Chubb_Variable7='" + flujo_In.dato_28
+                + "',@Chubb_Variable8='" + flujo_In.dato_29
+                + "',@Chubb_Variable9='" + flujo_In.dato_30
+                + "',@Chubb_Variable10='" + flujo_In.dato_31
+                + "',@Chubb_Variable11='" + flujo_In.dato_32
+                + "',@Chubb_Variable12='" + flujo_In.dato_33
+                + "',@Chubb_Variable13='" + flujo_In.dato_34 + "'";
+            return await _context.flujo_Respuestas.FromSqlRaw(stored).AsNoTracking().ToListAsync();
+
+        }
+
+
         #region Usuarios
 
 
@@ -190,7 +534,7 @@ namespace CallSouth.Ventas.Peru.Controller
         [Route("CRM/Carga/Detalle/Id/EstadoVentas")]
         public async Task<List<Flujo_Respuesta>> Get_CargaEstadoVentas(Flujo_ingreso flujo_In)
         {
-            string stored = "exec sp_formato_estadoventas  @tipo='" + flujo_In.dato + "', @ini = '" + flujo_In.dato_1 + "', @fin = '" + flujo_In.dato_2 + "', @campa = '" + flujo_In.dato_3 + "'";
+            string stored = "exec sp_formato_estadoventas  @tipo='" + flujo_In.dato + "', @ini = '" + flujo_In.dato_1 + "', @fin = '" + flujo_In.dato_2 + "', @campa = '" + flujo_In.dato_3 + "', @flujo = '" + flujo_In.dato_4 + "'";
             return await _context.flujo_Respuestas.FromSqlRaw(stored).AsNoTracking().ToListAsync();
 
 
@@ -204,7 +548,7 @@ namespace CallSouth.Ventas.Peru.Controller
         [Route("CRM/Panel/Tematico")]
         public async Task<List<PanelTematico>> Get_PanelTematico(Flujo_ingreso flujo_In)
         {
-            string stored = "exec sp_panelcontroltematico  @id='" + flujo_In.dato + "', @ini = '" + flujo_In.dato_1 + "', @fin = '" + flujo_In.dato_2  + "'";
+            string stored = "exec sp_panelcontroltematico  @id='" + flujo_In.dato + "', @ini = '" + flujo_In.dato_1 + "', @fin = '" + flujo_In.dato_2 + "', @flujo = '" + flujo_In.dato_3 + "'";
             return await _context.panelTematicos.FromSqlRaw(stored).AsNoTracking().ToListAsync();
 
 
@@ -307,6 +651,16 @@ namespace CallSouth.Ventas.Peru.Controller
         public async Task<List<Flujo_Respuesta>> Get_CargaDetalleIdAgentes(Flujo_ingreso flujo_In)
         {
             string stored = "exec sp_agentes_new  @flujo='" + flujo_In.dato + "'";
+            return await _context.flujo_Respuestas.FromSqlRaw(stored).AsNoTracking().ToListAsync();
+
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "CRM_Supervisor")]
+        [Route("CRM/Carga/Detalle/Id/Agentes/V2")]
+        public async Task<List<Flujo_Respuesta>> Get_CargaDetalleIdAgentes2(Flujo_ingreso flujo_In)
+        {
+            string stored = "exec sp_agentes_new_2  @flujo='" + flujo_In.dato + "'";
             return await _context.flujo_Respuestas.FromSqlRaw(stored).AsNoTracking().ToListAsync();
 
         }
@@ -825,6 +1179,16 @@ namespace CallSouth.Ventas.Peru.Controller
 
         }
 
+
+        [HttpPost]
+        [Authorize(Roles = "CRM_Supervisor")]
+        [Route("CRM/Cargatelefonia")]
+        public async Task<List<Flujo_Respuesta>> Get_Cargatelefonia(Flujo_ingreso flujo_In)
+        {
+            string stored = "exec sp_carga_telefonia  @carga='" + flujo_In.dato + "';";
+            return await _context.flujo_Respuestas.FromSqlRaw(stored).AsNoTracking().ToListAsync();
+
+        }
 
 
         [HttpPost]
@@ -1411,7 +1775,7 @@ namespace CallSouth.Ventas.Peru.Controller
         [Route("CRM/Calidad/Reporte/NoVenta")]
         public async Task<ActionResult<IEnumerable<Flujo_Respuesta>>> Get_CalidadChubbNoVenta(Flujo_ingreso flujo_In)
         {
-            string stored = "exec sp_reporte_calidad_chubb_noventa  @fecha= '" + flujo_In.dato + "',@company= '" + flujo_In.dato_1 + "';";
+            string stored = "exec sp_reporte_calidad_chubb_noventa  @fecha= '" + flujo_In.dato + "',@company= '" + flujo_In.dato_1 + "',@flujo= '" + flujo_In.dato_2 + "';";
 
 
             return await _context.flujo_Respuestas.FromSqlRaw(stored).AsNoTracking().ToListAsync();
@@ -1523,21 +1887,21 @@ namespace CallSouth.Ventas.Peru.Controller
         [HttpPost]
         [Authorize(Roles = "CRM_Supervisor")]
         [Route("CRM/DetalleCargas/Liberar")]
-        public async Task<ActionResult<IEnumerable<Flujo_Out_respuesta>>> Get_CargasDetalleLiberar(Flujo_ingreso flujo_In)
+        public async Task<ActionResult<IEnumerable<Flujo_Respuesta>>> Get_CargasDetalleLiberar(Flujo_ingreso flujo_In)
         {
 
-            string stored = "exec sp_carga_cargadetalle_liberacarga  @id= '" + flujo_In.dato + "'";
-            return await _context.flujo_Out_Respuestas.FromSqlRaw(stored).AsNoTracking().ToListAsync();
+            string stored = "exec sp_carga_cargadetalle_liberacarga  @carga= '" + flujo_In.dato + "'";
+            return await _context.flujo_Respuestas.FromSqlRaw(stored).AsNoTracking().ToListAsync();
         }
 
         [HttpPost]
         [Authorize(Roles = "CRM_Supervisor")]
         [Route("CRM/DetalleCargas/Bloquear")]
-        public async Task<ActionResult<IEnumerable<Flujo_Out_respuesta>>> Get_CargasDetalleBloquear(Flujo_ingreso flujo_In)
+        public async Task<ActionResult<IEnumerable<Flujo_Respuesta>>> Get_CargasDetalleBloquear(Flujo_ingreso flujo_In)
         {
 
-            string stored = "exec sp_carga_cargadetalle_liberacarga_block  @id= '" + flujo_In.dato + "'";
-            return await _context.flujo_Out_Respuestas.FromSqlRaw(stored).AsNoTracking().ToListAsync();
+            string stored = "exec sp_carga_cargadetalle_liberacarga_block  @carga= '" + flujo_In.dato + "'";
+            return await _context.flujo_Respuestas.FromSqlRaw(stored).AsNoTracking().ToListAsync();
 
         }
 
@@ -1882,12 +2246,23 @@ namespace CallSouth.Ventas.Peru.Controller
                                 sqlBulkCopy.ColumnMappings.Add("nombre_call", "Chubb_nombre_call");
                                 sqlBulkCopy.ColumnMappings.Add("tipo_base", "Chubb_tipo_base");
                                 sqlBulkCopy.ColumnMappings.Add("Campaña", "Chubb_Campana");
-                                sqlBulkCopy.ColumnMappings.Add("Variable_1", "Chubb_Variable_1");
+                                sqlBulkCopy.ColumnMappings.Add("Variable1", "Chubb_Variable_1");
                                 sqlBulkCopy.ColumnMappings.Add("Variable2", "Chubb_Variable2");
                                 sqlBulkCopy.ColumnMappings.Add("Variable3", "Chubb_Variable3");
                                 sqlBulkCopy.ColumnMappings.Add("Variable4", "Chubb_Variable4");
                                 sqlBulkCopy.ColumnMappings.Add("Variable5", "Chubb_Variable5");
+                                sqlBulkCopy.ColumnMappings.Add("Variable6", "Chubb_Variable6");
+                                sqlBulkCopy.ColumnMappings.Add("Variable7", "Chubb_Variable7");
+                                sqlBulkCopy.ColumnMappings.Add("Variable8", "Chubb_Variable8");
+                                sqlBulkCopy.ColumnMappings.Add("Variable9", "Chubb_Variable9");
+                                sqlBulkCopy.ColumnMappings.Add("Variable10", "Chubb_Variable10");
+                                sqlBulkCopy.ColumnMappings.Add("Variable11", "Chubb_Variable11");
+                                sqlBulkCopy.ColumnMappings.Add("Variable12", "Chubb_Variable12");
+                                sqlBulkCopy.ColumnMappings.Add("Variable13", "Chubb_Variable13");
+                             
                                 sqlBulkCopy.ColumnMappings.Add("CampoCarterizar", "Chubb_CampoCarterizar");
+                               
+
 
 
                                 cargador.nombre = carga.ToString();
@@ -1924,6 +2299,220 @@ namespace CallSouth.Ventas.Peru.Controller
 
         }
 
+
+        [SupportedOSPlatform("windows")]
+        [HttpPost]
+        [Authorize(Roles = "CRM_Supervisor")]
+        [Route("CRM/Chubb/Carga/CaminaSeguro")]
+        public IActionResult UploadFile_CaminaChubb(IFormFile postedFile, string flujo)
+        {
+            var cargador = new Cargador();
+            string wwwPath = this.Environment.WebRootPath;
+            string contentPath = this.Environment.ContentRootPath;
+
+
+            string dire = Directory.GetCurrentDirectory().ToString();
+
+
+            if (postedFile == null || postedFile.Length == 0)
+            {
+                cargador.flujo = "Archivo No Seleccionado";
+                return Ok(cargador);
+
+            }
+
+            var supportedTypes = new[] { "xlsx" };
+            var fileExt = System.IO.Path.GetExtension(postedFile.FileName).Substring(1);
+
+            if (!supportedTypes.Contains(fileExt))
+            {
+                cargador.flujo = "Archivo No Soportado";
+                return Ok(cargador);
+            }
+
+
+            if (postedFile != null)
+            {
+
+                //try
+                //{
+                string path = Path.Combine(dire, "Uploads");
+
+
+                if (!Directory.Exists(path))
+                {
+                    Directory.CreateDirectory(path);
+                }
+
+                //Save the uploaded Excel file.
+                string fileName = Path.GetFileName(postedFile.FileName);
+                string filePath = Path.Combine(path, fileName);
+
+                using (FileStream stream = new FileStream(filePath, FileMode.Create))
+                {
+                    postedFile.CopyTo(stream);
+                    cargador.flujo = postedFile.GetFilename().ToString() + " Archivo Cargado";
+                }
+
+                //Read the connection string for the Excel file.
+                string conString = this.Configuration.GetConnectionString("ExcelConString");
+                DataTable dt = new DataTable();
+                conString = string.Format(conString, filePath);
+
+
+                using (OleDbConnection connExcel = new OleDbConnection(conString))
+                {
+                    using (OleDbCommand cmdExcel = new OleDbCommand())
+                    {
+                        using (OleDbDataAdapter odaExcel = new OleDbDataAdapter())
+                        {
+                            cmdExcel.Connection = connExcel;
+
+                            //Get the name of First Sheet.
+                            connExcel.Open();
+                            DataTable dtExcelSchema;
+                            dtExcelSchema = connExcel.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, null);
+                            string sheetName = dtExcelSchema.Rows[0]["TABLE_NAME"].ToString();
+                            connExcel.Close();
+
+                            //Read Data from First Sheet.
+                            connExcel.Open();
+                            cmdExcel.CommandText = "SELECT * From [" + sheetName + "]";
+                            odaExcel.SelectCommand = cmdExcel;
+                            odaExcel.Fill(dt);
+                            connExcel.Close();
+                        }
+                    }
+                }
+
+
+                string carga = "";
+
+
+
+
+                foreach (DataRow row in dt.Rows)
+                {
+                    carga = row["Carga"].ToString();
+                }
+
+                conString = this.Configuration.GetConnectionString("constr");
+                using (SqlConnection con = new SqlConnection(conString))
+                {
+                    con.Open();
+
+                    String sql = "SELECT count(*) Cantidad FROM dbo.Carga_Bases_Flujo where nombre_carga ='" + carga.ToString() + "'";
+
+                    using (SqlCommand command = new SqlCommand(sql, con))
+                    {
+                        Int32 count = (Int32)command.ExecuteScalar();
+                        if (count != 0)
+                        {
+                            con.Close();
+                            cargador.flujo = "Nombre de Carga Duplicado En Base";
+                            return Ok(cargador);
+                        }
+                        else
+                        {
+
+                            using (SqlBulkCopy sqlBulkCopy = new SqlBulkCopy(con))
+                            {
+                                //Set the database table name.
+                                sqlBulkCopy.DestinationTableName = "dbo.Carga_Bases_Flujo";
+
+                                //[OPTIONAL]: Map the Excel columns with that of the database table.
+                                sqlBulkCopy.ColumnMappings.Add("Carga", "nombre_carga");
+                                sqlBulkCopy.ColumnMappings.Add("numero_documento", "Chubb_numero_documento");
+                                sqlBulkCopy.ColumnMappings.Add("tipo_documento", "Chubb_tipo_documento");
+                                sqlBulkCopy.ColumnMappings.Add("nombre", "Chubb_nombre");
+                                sqlBulkCopy.ColumnMappings.Add("tipo_tarjeta", "Chubb_tipo_tarjeta");
+                                sqlBulkCopy.ColumnMappings.Add("fecha_nacimiento", "Chubb_fecha_nacimiento");
+                                sqlBulkCopy.ColumnMappings.Add("edad", "Chubb_edad");
+                                sqlBulkCopy.ColumnMappings.Add("sexo", "Chubb_sexo");
+                                sqlBulkCopy.ColumnMappings.Add("celular1", "Chubb_celular1");
+                                sqlBulkCopy.ColumnMappings.Add("celular2", "Chubb_celular2");
+                                sqlBulkCopy.ColumnMappings.Add("fijo1", "Chubb_fijo1");
+                                sqlBulkCopy.ColumnMappings.Add("fijo2", "Chubb_fijo2");
+                                sqlBulkCopy.ColumnMappings.Add("email", "Chubb_email");
+                                sqlBulkCopy.ColumnMappings.Add("direccion", "Chubb_direccion");
+                                sqlBulkCopy.ColumnMappings.Add("distrito", "Chubb_distrito");
+                                sqlBulkCopy.ColumnMappings.Add("provincia", "Chubb_provincia");
+                                sqlBulkCopy.ColumnMappings.Add("departamento", "Chubb_departamento");
+                                sqlBulkCopy.ColumnMappings.Add("fecha_colocacion", "Chubb_fecha_colocacion");
+                                sqlBulkCopy.ColumnMappings.Add("tienda_colocacion", "Chubb_tienda_colocacion");
+                                sqlBulkCopy.ColumnMappings.Add("fecha_ult_consumo", "Chubb_fecha_ult_consumo");
+                                sqlBulkCopy.ColumnMappings.Add("tienda_ult_consumo", "Chubb_tienda_ult_consumo");
+                                sqlBulkCopy.ColumnMappings.Add("condicion_laboral", "Chubb_condicion_laboral");
+                                sqlBulkCopy.ColumnMappings.Add("zona", "Chubb_zona");
+                                sqlBulkCopy.ColumnMappings.Add("recencia", "Chubb_recencia");
+                                sqlBulkCopy.ColumnMappings.Add("cantidad_seguros", "Chubb_cantidad_seguros");
+                                sqlBulkCopy.ColumnMappings.Add("seguros_contratados", "Chubb_seguros_contratados");
+                                sqlBulkCopy.ColumnMappings.Add("clase_puntos_beneficios", "Chubb_clase_puntos_beneficios");
+                                sqlBulkCopy.ColumnMappings.Add("producto_ripley", "Chubb_producto_ripley");
+                                sqlBulkCopy.ColumnMappings.Add("fecha_compra_ultimo_seguro", "Chubb_fecha_compra_ultimo_seguro");
+                                sqlBulkCopy.ColumnMappings.Add("tiene_seguro", "Chubb_tiene_seguro");
+                                sqlBulkCopy.ColumnMappings.Add("fecha_pago_tc", "Chubb_fecha_pago_tc");
+                                sqlBulkCopy.ColumnMappings.Add("marca_call", "Chubb_marca_call");
+                                sqlBulkCopy.ColumnMappings.Add("marca_pd", "Chubb_marca_pd");
+                                sqlBulkCopy.ColumnMappings.Add("canal_consumo", "Chubb_canal_consumo");
+                                sqlBulkCopy.ColumnMappings.Add("segmento_rfm_spos", "Chubb_segmento_rfm_spos");
+                                sqlBulkCopy.ColumnMappings.Add("segmento_rfm_tienda", "Chubb_segmento_rfm_tienda");
+                                sqlBulkCopy.ColumnMappings.Add("tipo_captacion", "Chubb_tipo_captacion");
+                                sqlBulkCopy.ColumnMappings.Add("nombre_call", "Chubb_nombre_call");
+                                sqlBulkCopy.ColumnMappings.Add("tipo_base", "Chubb_tipo_base");
+                                sqlBulkCopy.ColumnMappings.Add("Campaña", "Chubb_Campana");
+                                sqlBulkCopy.ColumnMappings.Add("Variable1", "Chubb_Variable_1");
+                                sqlBulkCopy.ColumnMappings.Add("Variable2", "Chubb_Variable2");
+                                sqlBulkCopy.ColumnMappings.Add("Variable3", "Chubb_Variable3");
+                                sqlBulkCopy.ColumnMappings.Add("Variable4", "Chubb_Variable4");
+                                sqlBulkCopy.ColumnMappings.Add("Variable5", "Chubb_Variable5");
+                                sqlBulkCopy.ColumnMappings.Add("Variable6", "Chubb_Variable6");
+                                sqlBulkCopy.ColumnMappings.Add("Variable7", "Chubb_Variable7");
+                                sqlBulkCopy.ColumnMappings.Add("Variable8", "Chubb_Variable8");
+                                sqlBulkCopy.ColumnMappings.Add("Variable9", "Chubb_Variable9");
+                                sqlBulkCopy.ColumnMappings.Add("Variable10", "Chubb_Variable10");
+                                sqlBulkCopy.ColumnMappings.Add("Variable11", "Chubb_Variable11");
+                                sqlBulkCopy.ColumnMappings.Add("Variable12", "Chubb_Variable12");
+                                sqlBulkCopy.ColumnMappings.Add("Variable13", "Chubb_Variable13");
+
+                                sqlBulkCopy.ColumnMappings.Add("CampoCarterizar", "Chubb_CampoCarterizar");
+
+
+
+
+                                cargador.nombre = carga.ToString();
+                                //con.Open();
+                                sqlBulkCopy.WriteToServer(dt);
+
+
+                                SqlCommand cmd_2 = new SqlCommand("sp_info_carga_chubb_camina_seguro", con);
+                                cmd_2.CommandType = CommandType.StoredProcedure;
+                                cmd_2.Parameters.AddWithValue("@carga", carga.ToString());
+                                cmd_2.ExecuteNonQuery();
+
+                                con.Close();
+                            }
+                        }
+
+
+                    }
+                }
+
+                return Ok(cargador);
+                //}
+                //catch (Exception)
+                //{
+                //    cargador.flujo = "Formato No Valido (Columnas no Validas)";
+                //    return Ok(cargador);
+
+                //}
+
+                //Create a Folder.
+
+            }
+            return Ok(cargador);
+
+        }
         [SupportedOSPlatform("windows")]
         [HttpPost]
         [Authorize(Roles = "CRM_Supervisor")]
@@ -2085,12 +2674,22 @@ namespace CallSouth.Ventas.Peru.Controller
                                 sqlBulkCopy.ColumnMappings.Add("nombre_call", "Chubb_nombre_call");
                                 sqlBulkCopy.ColumnMappings.Add("tipo_base", "Chubb_tipo_base");
                                 sqlBulkCopy.ColumnMappings.Add("Campaña", "Chubb_Campana");
-                                sqlBulkCopy.ColumnMappings.Add("Variable_1", "Chubb_Variable_1");
+                                sqlBulkCopy.ColumnMappings.Add("Variable1", "Chubb_Variable_1");
                                 sqlBulkCopy.ColumnMappings.Add("Variable2", "Chubb_Variable2");
                                 sqlBulkCopy.ColumnMappings.Add("Variable3", "Chubb_Variable3");
                                 sqlBulkCopy.ColumnMappings.Add("Variable4", "Chubb_Variable4");
                                 sqlBulkCopy.ColumnMappings.Add("Variable5", "Chubb_Variable5");
+                                sqlBulkCopy.ColumnMappings.Add("Variable6", "Chubb_Variable6");
+                                sqlBulkCopy.ColumnMappings.Add("Variable7", "Chubb_Variable7");
+                                sqlBulkCopy.ColumnMappings.Add("Variable8", "Chubb_Variable8");
+                                sqlBulkCopy.ColumnMappings.Add("Variable9", "Chubb_Variable9");
+                                sqlBulkCopy.ColumnMappings.Add("Variable10", "Chubb_Variable10");
+                                sqlBulkCopy.ColumnMappings.Add("Variable11", "Chubb_Variable11");
+                                sqlBulkCopy.ColumnMappings.Add("Variable12", "Chubb_Variable12");
+                                sqlBulkCopy.ColumnMappings.Add("Variable13", "Chubb_Variable13");
+
                                 sqlBulkCopy.ColumnMappings.Add("CampoCarterizar", "Chubb_CampoCarterizar");
+
 
 
                                 cargador.nombre = carga.ToString();
@@ -2182,7 +2781,7 @@ namespace CallSouth.Ventas.Peru.Controller
         [Route("CRM/Panel/Tematico/V2")]
         public async Task<List<PanelTematico>> Get_PanelTematicoAout(Flujo_ingreso flujo_In)
         {
-            string stored = "exec sp_panelcontroltematico  @id='" + flujo_In.dato + "', @ini = '" + flujo_In.dato_1 + "', @fin = '" + flujo_In.dato_2 + "'";
+            string stored = "exec sp_panelcontroltematico  @id='" + flujo_In.dato + "', @ini = '" + flujo_In.dato_1 + "', @fin = '" + flujo_In.dato_2 + "', @flujo = '" + flujo_In.dato_3 + "'";
             return await _context.panelTematicos.FromSqlRaw(stored).AsNoTracking().ToListAsync();
 
 
