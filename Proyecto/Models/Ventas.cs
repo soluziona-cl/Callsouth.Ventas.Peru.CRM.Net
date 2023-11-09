@@ -413,6 +413,7 @@ namespace CallSouth.Ventas.Peru.Models
         public string fechainformada { get; set; }
         public string asesor { get; set; }
         public string campaign_flujo { get; set; }
+        public string calidad_estado { get; set; }
 
 
 

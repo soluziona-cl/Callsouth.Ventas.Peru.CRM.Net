@@ -59,7 +59,7 @@ namespace CallSouth.Ventas.Peru.Controller
         [Route("CRM/PanelVentas")]
         public async Task<List<Flujo_Respuesta>> Get_PanelVenta(Flujo_ingreso_Filtros flujo_In)
         {
-            string stored = "exec sp_panel_principal_ventas   @blockanexo='" + flujo_In.dato + "'";
+            string stored = "exec sp_panel_principal_ventas   @pTYPE='" + flujo_In.dato + "'";
             return await _context.flujo_Respuestas.FromSqlRaw(stored).AsNoTracking().ToListAsync();
 
         } 
@@ -1494,10 +1494,21 @@ namespace CallSouth.Ventas.Peru.Controller
 
         [HttpPost]
         [Authorize(Roles = "CRM_Supervisor")]
+        [Route("CRM/Calidad/Grabaciones/Grabaciones/Id")]
+        public async Task<List<Flujo_Respuesta>> Get_CalidadGrabacionesRegrabacionId(Flujo_ingreso flujo_In)
+        {
+            string stored = "exec sp_gestion_venta_dia_grabacion_id   @id='" + flujo_In.dato + "';";
+
+            return await _context.flujo_Respuestas.FromSqlRaw(stored).AsNoTracking().ToListAsync();
+
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "CRM_Supervisor")]
         [Route("CRM/Calidad/Chubb/Id/NoVenta")]
         public async Task<List<Flujo_Respuesta>> Get_CalidadNoVenta(Flujo_ingreso flujo_In)
         {
-            string stored = "exec sp_gestion_venta_dia_grabacion_id_chubb_noventa   @id='" + flujo_In.dato + "';";
+            string stored = "exec sp_gestion_venta_dia_grabacion_id_noventa   @id='" + flujo_In.dato + "';";
 
             return await _context.flujo_Respuestas.FromSqlRaw(stored).AsNoTracking().ToListAsync();
 
