@@ -76,6 +76,8 @@ namespace CallSouth.Ventas.Peru.Models
         public DbSet<PanelTematico> panelTematicos { get; set; }
         public DbSet<Flujo_ingreso_Filtros> flujo_Ingreso_Filtros { get; set; }
         public DbSet<Filtros> filtros { get; set; }
+        public DbSet<Trama_Resultante_Intento_Renuncia> trama_Resultante_Intento_Renuncias { get; set; }
+        public DbSet<Reporte_Resultante_Calidad_Inchape> reporte_Resultante_Calidad_Inchapes { get; set; }
 
 
     }

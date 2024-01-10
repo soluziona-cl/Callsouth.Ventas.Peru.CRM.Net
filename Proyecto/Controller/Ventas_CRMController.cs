@@ -297,6 +297,18 @@ namespace CallSouth.Ventas.Peru.Controller
 
         }
 
+
+        [HttpPost]
+        [Authorize(Roles = "CRM_Supervisor")]
+        [Route("CRM/Reporte/DetalleGestion/Pendientes")]
+        public async Task<List<Flujo_Respuesta>> Get_ReporteDetalleGestion(Flujo_ingreso flujo_In)
+        {
+            string stored = "exec sp_filter_report_gestion  @reporteID='" + flujo_In.dato + "' ,@fecha1='" + flujo_In.dato_1 + "' ,@fecha2='" + flujo_In.dato_2 + "' ,@campania='" + flujo_In.dato_3 + "';";
+            return await _context.flujo_Respuestas.FromSqlRaw(stored).AsNoTracking().ToListAsync();
+
+        }
+
+
         [HttpPost]
         [Authorize(Roles = "CRM_Supervisor")]
         [Route("CRM/Filtros/Resumen")]
@@ -662,6 +674,17 @@ namespace CallSouth.Ventas.Peru.Controller
         {
             string stored = "exec sp_agentes_new_2  @flujo='" + flujo_In.dato + "'";
             return await _context.flujo_Respuestas.FromSqlRaw(stored).AsNoTracking().ToListAsync();
+
+        }
+     
+        
+        [HttpPost]
+        [Authorize(Roles = "CRM_Supervisor")]
+        [Route("CRM/Resultante/Intento/Renuncia")]
+        public async Task<List<Trama_Resultante_Intento_Renuncia>> Get_ResultanteIntentoRenuncia(Flujo_ingreso flujo_In)
+        {
+            string stored = "exec sp_trama_resultante_renuncia  @ini='" + flujo_In.dato + "', @fin='" + flujo_In.dato_1 + "'";
+            return await _context.trama_Resultante_Intento_Renuncias.FromSqlRaw(stored).AsNoTracking().ToListAsync();
 
         }
 
@@ -1780,6 +1803,32 @@ namespace CallSouth.Ventas.Peru.Controller
 
         }
 
+
+        [HttpPost]
+        [Authorize(Roles = "CRM_Supervisor")]
+        [Route("CRM/Calidad/Reporte/Seguimiento")]
+        public async Task<ActionResult<IEnumerable<Flujo_Respuesta>>> Get_ReporteSeguimiento(Flujo_ingreso flujo_In)
+        {
+            string stored = "exec sp_seguimiento_calidad   @company= '" + flujo_In.dato + "',@ini= '" + flujo_In.dato_1 + "',@fin= '" + flujo_In.dato_2 + "';";
+
+
+            return await _context.flujo_Respuestas.FromSqlRaw(stored).AsNoTracking().ToListAsync();
+
+
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "CRM_Supervisor")]
+        [Route("CRM/Calidad/Reporte/Inchape")]
+        public async Task<ActionResult<IEnumerable<Reporte_Resultante_Calidad_Inchape>>> Get_CalidadInchape(Flujo_ingreso flujo_In)
+        {
+            string stored = "exec sp_reporte_calidad_inchape   @company= '" + flujo_In.dato + "',@ini= '" + flujo_In.dato_1 + "',@fin= '" + flujo_In.dato_2 + "';";
+
+
+            return await _context.reporte_Resultante_Calidad_Inchapes.FromSqlRaw(stored).AsNoTracking().ToListAsync();
+
+
+        }
 
         [HttpPost]
         [Authorize(Roles = "CRM_Supervisor")]

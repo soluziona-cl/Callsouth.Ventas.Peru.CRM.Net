@@ -402,6 +402,89 @@ namespace CallSouth.Ventas.Peru.Models
 
     }
 
+    public class Reporte_Resultante_Calidad_Inchape
+    {
+        [Key]
+        public string cliente { get; set; }
+        public string documento { get; set; }
+        public string asesor { get; set; }
+        public string p_1 { get; set; }
+        public string p_2 { get; set; }
+        public string p_3 { get; set; }
+        public string p_4 { get; set; }
+        public string p_5 { get; set; }
+        public string p_6 { get; set; }
+        public string p_7 { get; set; }
+        public string p_8 { get; set; }
+        public string p_9 { get; set; }
+        public string p_10 { get; set; }
+        public string p_11 { get; set; }
+        public string p_12 { get; set; }
+        public string p_13 { get; set; }
+        public string p_14 { get; set; }
+        public string p_15 { get; set; }
+        public string p_16 { get; set; }
+        public string p_17 { get; set; }
+        public string p_18 { get; set; }
+        public string p_19 { get; set; }
+        public string p_20 { get; set; }
+        public string p_21 { get; set; }
+        public string p_22 { get; set; }
+        public string p_23 { get; set; }
+        public string p_24 { get; set; }
+        public string p_25 { get; set; }
+        public string p_26 { get; set; }
+        public string Nota { get; set; }
+        public string fecha_evaluacion { get; set; }
+        public string fecha_venta { get; set; }
+        public string TMO { get; set; }
+        public string nombre_cliente { get; set; }
+        public string auditor { get; set; }
+        public string FonoVenta { get; set; }
+        public string descripcion { get; set; }
+        public string estado { get; set; }
+        public string calificacion_final { get; set; }
+        public string cli_id { get; set; }
+        public string nivel1 { get; set; }
+        public string nivel2 { get; set; }
+        public string nivel3 { get; set; }
+        public string nivel4 { get; set; }
+    }
+
+
+    public class Trama_Resultante_Intento_Renuncia
+    {
+
+        [Key]
+        public string fecha { get; set; }
+        public string call_id { get; set; }
+        public string user_neotel { get; set; }
+        public string inicio_llamada { get; set; }
+        public string hora_ringing { get; set; }
+        public string hora_inicio_agente { get; set; }
+        public string hora_fin_agente { get; set; }
+        public string cli_id { get; set; }
+        public string cli_fecha_tipificacion { get; set; }
+        public string cli_hora_tipificacion { get; set; }
+        public string nombre_plan { get; set; }
+        public string cli_nombre_cliente { get; set; }
+        public string tipo_doc { get; set; }
+        public string nro_documento { get; set; }
+        public string fecha_nacimiento { get; set; }
+        public string sexo { get; set; }
+        public string telefono_1 { get; set; }
+        public string telefono_2 { get; set; }
+        public string cli_aemail { get; set; }
+        public string departamento { get; set; }
+        public string provincia { get; set; }
+        public string distrito { get; set; }
+        public string direccion { get; set; }
+        public string nivel_1 { get; set; }
+        public string nivel_2 { get; set; }
+        public string nivel_3 { get; set; }
+        public string nivel_4 { get; set; }
+       
+    }
     public class Calidad_Admin_List_Asignadas
     {
         [Key]
